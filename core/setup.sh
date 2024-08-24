@@ -1,7 +1,9 @@
 
 sudo apt install -y openvpn dialog python3-pip python3-setuptools
-sudo pip3 install protonvpn-cli
-
+wget -q -O - https://repo.protonvpn.com/debian/public_key.asc | sudo apt-key add -
+echo 'deb https://repo.protonvpn.com/debian stable main' | sudo tee /etc/apt/sources.list.d/protonvpn.list
+sudo apt update
+sudo apt install -y protonvpn-cli
 
 # Download the latest version of geckodriver
 GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep 'tag_name' | cut -d\" -f4)
