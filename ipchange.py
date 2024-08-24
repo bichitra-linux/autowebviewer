@@ -13,12 +13,19 @@ splash = """
 """
 print(splash)
 time.sleep(3)
-# Run setup.sh script
-try:
-    subprocess.run(["bash", "core/setup.sh"], check=True)
-except subprocess.CalledProcessError as e:
-    print(f"Error occurred while running setup.sh: {e}")
-    exit(1)
+
+
+# Ask the user if they want to run the setup script
+run_setup = input("Do you want to run the setup script? (yes/no): ").strip().lower()
+
+if run_setup == 'yes':
+    try:
+        subprocess.run(["bash", "core/setup.sh"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while running setup.sh: {e}")
+        exit(1)
+else:
+    print("Setup script was not run.")
 
 time.sleep(1)
 os.system("clear")
