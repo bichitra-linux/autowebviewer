@@ -1,2 +1,9 @@
+# HTTP library for making requests
 requests==2.32.3
+
+# Web browser automation
 selenium==4.23.1
+
+# Additional packages (if any)
+# Example: BeautifulSoup for parsing HTML
+# beautifulsoup4==4.12.0
