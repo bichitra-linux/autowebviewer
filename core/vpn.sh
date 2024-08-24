@@ -7,10 +7,7 @@ while true; do
   i=$(($RANDOM % ${#servers[@]}))
   
   # Disconnect from any current VPN session
-  if ! protonvpn-cli d; then
-    echo "Failed to disconnect from ProtonVPN. Exiting."
-    exit 1
-  fi
+  protonvpn-cli d || echo "No active VPN session to disconnect."
   
   # Connect to a random server
   if ! protonvpn-cli c --cc ${servers[$i]}; then
