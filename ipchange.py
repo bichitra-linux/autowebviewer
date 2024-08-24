@@ -1,4 +1,5 @@
 import os
+import subprocess
 import time
 
 
@@ -12,13 +13,29 @@ splash = """
 """
 print(splash)
 time.sleep(3)
-os.system("cd core && bash setup.sh")
+# Run setup.sh script
+try:
+    subprocess.run(["bash", "core/setup.sh"], check=True)
+except subprocess.CalledProcessError as e:
+    print(f"Error occurred while running setup.sh: {e}")
+    exit(1)
+
 time.sleep(1)
 os.system("clear")
 print(splash)
-op=str(input("Did you already initialize it(Y/n) :"))
-if((op=="N") or (op=="n")):
- os.system("cd core && bash init.sh")
-else:
- pass
-os.system("cd core && bash vpn.sh")
+
+# Prompt user for initialization
+op = input("Did you already initialize it (Y/n) :").strip().lower()
+if op == "n":
+    try:
+        subprocess.run(["bash", "core/init.sh"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred while running init.sh: {e}")
+        exit(1)
+
+# Run vpn.sh script
+try:
+    subprocess.run(["bash", "core/vpn.sh"], check=True)
+except subprocess.CalledProcessError as e:
+    print(f"Error occurred while running vpn.sh: {e}")
+    exit(1)
